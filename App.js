@@ -6,49 +6,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { AuthContext } from './component/context';
 
 const App = () => {
-	const initialLoginState = {
-		isLoading: true,
-		userName: null,
-		userToken: null
-	}
-	const loginReducers = (prevState, action) => {
-		switch (action.type) {
-			case 'LOGIN':
-				return {
-					...prevState,
-					userToken: action.token,
-					isLoading: false
-				};
-			case 'REGISTER':
-				return {
-					...prevState,
-					userName: action.id,
-					userToken: action.token,
-					isLoading: false
-				};
-			case 'LOGOUT':
-				return {
-					...prevState,
-					userName: null,
-					userToken: null,
-					isLoading: false
-				};
-			case 'RETRIEVE_TOKEN':
-				return {
-					...prevState,
-					userToken: action.token,
-					isLoading: false
-				};
-		}
-	}
-
-	const [loginstate, dispatch] = React.useReducer(loginReducers,initialLoginState);
-
 	const [isLoading, setIsloading] = React.useState(true);
 	const [userToken, setUserToken] = React.useState(null);
 
 	const authContext = React.useMemo(() => ({
-		signIn: (userName , password) => { 
+		signIn: () => { 
 			setUserToken('signin'), setIsloading(false)
 		},
 		signUp: () => { 
